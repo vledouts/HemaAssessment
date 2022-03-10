@@ -1,11 +1,16 @@
 from pyspark.sql import SparkSession
 
+from steps import *
 
 if __name__ == '__main__':
 
     spark = SparkSession.builder.appName('HemaAssessment').getOrCreate()
 
-    data = spark.sparkContext.parallelize([1, 2, 3])
+    logger4j = spark.sparkContext._jvm.org.apache.log4j
 
-    for el in data.collect():
-        print("Hello {} time!".format(el))
+    logger = logger4j.logManager.getLogger(__name__)
+
+    logger.info("Hello world!")
+
+    landing_to_row(logger)
+

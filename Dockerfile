@@ -10,9 +10,9 @@ COPY --from=py3 / /
 ARG PYSPARK_VERSION=3.2.0
 RUN pip --no-cache-dir install pyspark==${PYSPARK_VERSION}
 
-COPY src/main.py .
+COPY src/* .
 
-RUN python3 main.py
+ENTRYPOINT ["bash"]
 
 
 
