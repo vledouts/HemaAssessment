@@ -1,3 +1,6 @@
+import sys
+import logging
+
 from pyspark.sql import SparkSession
 
 from steps import *
@@ -6,11 +9,13 @@ if __name__ == '__main__':
 
     spark = SparkSession.builder.appName('HemaAssessment').getOrCreate()
 
-    logger4j = spark.sparkContext._jvm.org.apache.log4j
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-    logger = logger4j.logManager.getLogger(__name__)
+    logger = logging.getLogger('driver_logger')
 
     logger.info("Hello world!")
 
-    landing_to_row(logger)
+    file_path = landing_to_row(logger)
+
+    raw_to_curated(file_path, spark, logger)
 
