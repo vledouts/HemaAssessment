@@ -18,16 +18,18 @@ def landing_to_row(logger):
 
         return
 
+    file_name = found_file[0].split('/')[2].split(".csv")[0]
+
     # for the sake of simplicity let's assume there is only one file uploaded daily
 
     target = "dataLake/raw/{0}_{1}.csv".format(
-        found_file[0].split('/')[2].split(".csv")[0],
+        file_name,
         str(datetime.now().date())
     )
 
     Path(found_file[0]).rename(target)
 
-    logger.info("moved file {} into raw zone".format(target))
+    logger.info("moved file {} into raw zone".format(file_name))
 
     return target
 
@@ -51,7 +53,7 @@ def raw_to_curated(file_path, spark, logger):
     ).withColumn(
         "ingestionDate", lit(datetime.now().date())
     ).withColumn(
-        "ingestionDate", lit(datetime.now().time().strftime("%H:%M:%S"))
+        "ingestionTime", lit(datetime.now().time().strftime("%H:%M:%S"))
     ).withColumn(
         "orderDay", dayofmonth("OrderDate")
     ).withColumn(
@@ -67,3 +69,6 @@ def raw_to_curated(file_path, spark, logger):
         "orderMonth",
         "orderDay"
     ).parquet("/dataLake/curated/transactions")
+
+    return file_name
+
