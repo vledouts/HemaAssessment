@@ -2,7 +2,6 @@ import glob
 
 from datetime import datetime
 from pathlib import Path
-from pyspark.sql import DataFrame
 from pyspark.sql.functions import lit, dayofmonth, month, year
 
 from models import ingestionSchema, selectedFields
@@ -10,7 +9,7 @@ from models import ingestionSchema, selectedFields
 
 def landing_to_row(logger):
 
-    # the file system is mounted in the dataLake folder so it can be hardcoded
+    # the file system is mounted in the dataLake folder, so the path can be hardcoded
     found_file = glob.glob("dataLake/landing/*.csv")
 
     if len(found_file) == 0:

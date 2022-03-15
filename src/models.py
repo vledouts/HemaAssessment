@@ -1,35 +1,45 @@
 import pyspark.sql.types as T
 
 ingestionSchema = T.StructType([
-    T.StructField('RowID', T.StringType(), False),
-    T.StructField('OrderID', T.StringType(), False),
-    T.StructField('OrderDate', T.DateType(), False),
-    T.StructField('ShipDate', T.DateType(), True),
-    T.StructField('ShipMode', T.StringType(), True),
-    T.StructField('CustomerID', T.StringType(), False),
-    T.StructField('CustomerName', T.StringType(), True),
-    T.StructField('Segment', T.StringType(), True),
-    T.StructField('Country', T.StringType(), True),
-    T.StructField('City', T.StringType(), True),
-    T.StructField('State', T.StringType(), True),
-    T.StructField('PostalCode', T.StringType(), True),
-    T.StructField('Region', T.StringType(), True),
-    T.StructField('ProductId', T.StringType(), False),
-    T.StructField('Category', T.StringType(), True),
-    T.StructField('SubCategory', T.StringType(), True),
-    T.StructField('ProductName', T.StringType(), True),
-    T.StructField('Sales', T.DoubleType(), True)
+    T.StructField('rowID', T.StringType(), False),
+    T.StructField('orderID', T.StringType(), False),
+    T.StructField('orderDate', T.DateType(), False),
+    T.StructField('shipDate', T.DateType(), True),
+    T.StructField('shipMode', T.StringType(), True),
+    T.StructField('customerID', T.StringType(), False),
+    T.StructField('customerName', T.StringType(), True),
+    T.StructField('segment', T.StringType(), True),
+    T.StructField('country', T.StringType(), True),
+    T.StructField('city', T.StringType(), True),
+    T.StructField('state', T.StringType(), True),
+    T.StructField('postalCode', T.StringType(), True),
+    T.StructField('region', T.StringType(), True),
+    T.StructField('productId', T.StringType(), False),
+    T.StructField('category', T.StringType(), True),
+    T.StructField('subCategory', T.StringType(), True),
+    T.StructField('productName', T.StringType(), True),
+    T.StructField('sales', T.DoubleType(), True)
 ])
 
 selectedFields = [
-    'RowID',
-    'OrderID',
-    'OrderDate',
-    'ShipDate',
-    'ShipMode',
-    'CustomerID',
-    'CustomerName',
-    'Segment',
-    'Country',
-    'City'
+    'rowID',
+    'orderID',
+    'orderDate',
+    'shipDate',
+    'shipMode',
+    'customerID',
+    'customerName',
+    'segment',
+    'country',
+    'city'
+]
+
+customerKeys = [
+    'customerId',
+    'customerName',
+    'customerFirstName',
+    'customerLastName',
+    'customerSegment',
+    'country',
+    'city'
 ]
